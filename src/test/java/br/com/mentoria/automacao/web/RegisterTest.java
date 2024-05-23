@@ -1,3 +1,6 @@
+package br.com.mentoria.automacao.web;
+
+import br.com.mentoria.automacao.web.configuration.BaseTest;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -5,14 +8,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class RegisterTest {
+import java.time.Duration;
+
+public class RegisterTest extends BaseTest {
 
     @Test
     public void register(){
-        WebDriver driver = new ChromeDriver();
 
-        driver.manage().window().maximize();
         driver.get("https://demo.automationtesting.in/Register.html");
 
         driver.findElement(By.xpath("//input[@placeholder='First Name']")).sendKeys("etech");
