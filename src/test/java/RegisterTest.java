@@ -52,5 +52,7 @@ public class RegisterTest {
 
         WebElement upload = driver.findElement(By.id("imagesrc"));
         upload.sendKeys("C:\\Users\\lucas\\OneDrive\\Imagens\\cleita\\WhatsApp Image 2024-03-10 at 19.28.21.jpeg");
+
+        driver.quit();
     }
 }
