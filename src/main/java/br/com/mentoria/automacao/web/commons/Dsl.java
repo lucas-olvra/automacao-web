@@ -3,6 +3,7 @@ package br.com.mentoria.automacao.web.commons;
 import br.com.mentoria.automacao.web.configuration.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 public class Dsl extends BaseTest {
@@ -106,5 +107,15 @@ public class Dsl extends BaseTest {
     public void uploadImage(String id, String path){
         WebElement upload = driver.findElement(By.id(id));
         upload.sendKeys(path);
+    }
+
+    /**
+     * Realiza a interação do cursor até o elemento
+     * @param xpath Inserir o elemento xpath
+     */
+    public void actionByXpath(String xpath){
+        Actions actions = new Actions(driver);
+        WebElement webElement = driver.findElement(By.xpath(xpath));
+        actions.moveToElement(webElement).build().perform();
     }
 }
