@@ -1,21 +1,25 @@
 package br.com.mentoria.automacao.web;
 
 import br.com.mentoria.automacao.web.commons.Dsl;
+import com.github.javafaker.Faker;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 
 public class RegisterTest extends Dsl {
 
+    Faker faker = new Faker();
     @Test
     public void register() {
 
+        String name = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String address = faker.address().fullAddress();
+
         super.accessSite("https://demo.automationtesting.in/Register.html");
-        super.writeByXpath("//input[@placeholder='First Name']", "etech");
-        super.writeByXpath("//input[@placeholder='Last Name']", "Mentoria");
-        super.writeByXpath("//textarea[@ng-model='Adress']", "teste endereço");
+        super.writeByXpath("//input[@placeholder='First Name']", name);
+        super.writeByXpath("//input[@placeholder='Last Name']", lastName);
+        super.writeByXpath("//textarea[@ng-model='Adress']", address);
         super.writeByXpath("//input[@type='email']", "etechmentoria@example.com");
         super.writeByXpath("//input[@type='tel']", "4002892240");
 
