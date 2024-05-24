@@ -1,62 +1,50 @@
 package br.com.mentoria.automacao.web;
 
-import br.com.mentoria.automacao.web.configuration.BaseTest;
+import br.com.mentoria.automacao.web.commons.Dsl;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-public class RegisterTest extends BaseTest {
+public class RegisterTest extends Dsl {
 
     @Test
-    public void register(){
+    public void register() {
 
-        driver.get("https://demo.automationtesting.in/Register.html");
+        super.accessSite("https://demo.automationtesting.in/Register.html");
+        super.writeByXpath("//input[@placeholder='First Name']", "etech");
+        super.writeByXpath("//input[@placeholder='Last Name']", "Mentoria");
+        super.writeByXpath("//textarea[@ng-model='Adress']", "teste endereço");
+        super.writeByXpath("//input[@type='email']", "etechmentoria@example.com");
+        super.writeByXpath("//input[@type='tel']", "4002892240");
 
-        driver.findElement(By.xpath("//input[@placeholder='First Name']")).sendKeys("etech");
-        driver.findElement(By.xpath("//input[@placeholder='Last Name']")).sendKeys("Mentoria");
-        driver.findElement(By.xpath("//textarea[@ng-model='Adress']")).sendKeys("teste endereço");
-        driver.findElement(By.xpath("//input[@type='email']")).sendKeys("etechmentoria@example.com");
-        driver.findElement(By.xpath("//input[@type='tel']")).sendKeys("4002892240");
-
-        driver.findElement(By.xpath("//input[@value='Male']")).click();
-        driver.findElement(By.id("checkbox2")).click();
-        driver.findElement(By.id("msdd")).click();
+        super.clickByXpath("//input[@value='Male']");
+        super.clickById("checkbox2");
+        super.clickById("msdd");
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scroll(0, 250);");
+        js.executeScript("window.scroll(0, 300);");
+
         driver.findElement(By.xpath("//a[@class='ui-corner-all' and text()='Portuguese']")).click();
 
-        Select skills = new Select(driver.findElement(By.id("Skills")));
-        skills.selectByValue("Java");
 
-        Select countries = new Select(driver.findElement(By.id("countries")));
-        countries.selectByIndex(0);
+        super.selectyByValueId("Skills", "Java");
 
-        Select country = new Select(driver.findElement(By.id("country")));
-        country.selectByIndex(10);
+        super.selectyByIndex("countries", 0);
 
-        Select year = new Select(driver.findElement(By.id("yearbox")));
-        year.selectByVisibleText("2000");
+        super.selectyByIndex("country", 10);
 
-        Select month = new Select(driver.findElement(By.xpath("//select[@placeholder='Month']")));
-        month.selectByValue("October");
+        super.selectyByVisibleText("yearbox", "2000");
 
-        Select day = new Select(driver.findElement(By.id("daybox")));
-        day.selectByVisibleText("27");
+        super.selectyByValue("//select[@placeholder='Month']", "October");
 
-        driver.findElement(By.id("firstpassword")).sendKeys("12345678910");
-        driver.findElement(By.id("secondpassword")).sendKeys("12345678910");
+        super.selectyByVisibleTextInt("daybox", 27);
 
-        WebElement upload = driver.findElement(By.id("imagesrc"));
-        upload.sendKeys("C:\\Users\\lucas\\OneDrive\\Imagens\\cleita\\WhatsApp Image 2024-03-10 at 19.28.21.jpeg");
+        super.writeById("firstpassword", "12345678910");
+        super.writeById("secondpassword", "12345678910");
+
+        super.uploadImage("imagesrc", "C:\\Users\\lucas\\OneDrive\\Imagens\\cleita\\WhatsApp Image 2024-03-10 at 19.28.21.jpeg");
 
         driver.quit();
     }
